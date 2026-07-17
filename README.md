@@ -1,6 +1,6 @@
 # FUN//CTRL
 
-[![CI](https://github.com/Aysksream/fun60-control/actions/workflows/ci.yml/badge.svg)](https://github.com/Aysksream/fun60-control/actions/workflows/ci.yml)
+[![CI](https://github.com/Aysksream/Software-for-my-HE-Keyb/actions/workflows/ci.yml/badge.svg)](https://github.com/Aysksream/Software-for-my-HE-Keyb/actions/workflows/ci.yml)
 [![License: GPL v3](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
 [![Platform: Windows](https://img.shields.io/badge/platform-Windows-0078D4.svg)](#requirements)
 
