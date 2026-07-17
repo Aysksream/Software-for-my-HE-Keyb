@@ -6,7 +6,7 @@ const API_BASE = import.meta.env.VITE_BRIDGE_URL ?? "";
 async function jsonRequest<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE}${path}`, {
     ...init,
-    headers: { "Content-Type": "application/json", ...(init?.headers ?? {}) },
+    headers: { "Content-Type": "application/json", "X-FUN60-Control": "1", ...(init?.headers ?? {}) },
   });
   if (!response.ok) throw new Error((await response.json().catch(() => null))?.error ?? `Request failed (${response.status})`);
   return response.json() as Promise<T>;

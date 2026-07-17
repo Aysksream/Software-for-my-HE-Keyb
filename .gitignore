@@ -4,7 +4,16 @@ vendor-analysis/
 *.log
 .DS_Store
 .env
-.env.local
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets.*
+settings.json
 coverage/
 .fun60-control/
 *.tmp

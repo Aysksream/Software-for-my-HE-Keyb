@@ -42,8 +42,8 @@ export function loadSettings(): StoredSettings {
 
 export function saveSettings(settings: StoredSettings): void {
   const target = settingsPath();
-  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.mkdirSync(path.dirname(target), { recursive: true, mode: 0o700 });
   const temporary = `${target}.tmp`;
-  fs.writeFileSync(temporary, `${JSON.stringify(settings, null, 2)}\n`, "utf8");
+  fs.writeFileSync(temporary, `${JSON.stringify(settings, null, 2)}\n`, { encoding: "utf8", mode: 0o600 });
   fs.renameSync(temporary, target);
 }

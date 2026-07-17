@@ -37,6 +37,10 @@ writes commit only on the final packet.
 ## Trust boundaries
 
 - Only explicit `3151` FUN60 product IDs may be opened.
+- API requests must use a loopback `Host` header and, when sent by a browser,
+  an explicitly allowed origin.
+- State-changing API requests require JSON plus the client control header,
+  preventing cross-site forms from reaching HID operations.
 - Numeric profile values are clamped by the bridge.
 - The hosted interface cannot inspect local processes.
 - Background automation requires the local bridge.
@@ -52,3 +56,6 @@ Settings are written atomically to:
 ```
 
 No cloud account or telemetry service is used.
+
+The raw operating-system HID path is kept inside the device adapter and is not
+included in API status responses.

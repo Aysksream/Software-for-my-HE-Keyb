@@ -54,7 +54,7 @@ export class Controller {
   saveAutomation(automation: AutomationSettings): BridgeStatus {
     this.settings.automation = {
       enabled: Boolean(automation.enabled),
-      gameProcesses: Array.from(new Set(automation.gameProcesses.map((value) => value.trim()).filter(Boolean))).slice(0, 200),
+      gameProcesses: Array.from(new Set(automation.gameProcesses.map((value) => String(value).trim().slice(0, 128)).filter(Boolean))).slice(0, 200),
       switchDelayMs: Math.max(500, Math.min(30_000, Number(automation.switchDelayMs) || 2500)),
     };
     saveSettings(this.settings);

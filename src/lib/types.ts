@@ -22,7 +22,6 @@ export interface DeviceSummary {
   vendorId?: number;
   productId?: number;
   product?: string;
-  path?: string;
   transport?: "bridge" | "webhid";
 }
 

@@ -1,6 +1,7 @@
 # FUN//CTRL
 
 [![CI](https://github.com/Aysksream/Software-for-my-HE-Keyb/actions/workflows/ci.yml/badge.svg)](https://github.com/Aysksream/Software-for-my-HE-Keyb/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/Aysksream/Software-for-my-HE-Keyb/actions/workflows/codeql.yml/badge.svg)](https://github.com/Aysksream/Software-for-my-HE-Keyb/actions/workflows/codeql.yml)
 [![License: GPL v3](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
 [![Platform: Windows](https://img.shields.io/badge/platform-Windows-0078D4.svg)](#requirements)
 
@@ -19,6 +20,8 @@ browser-based configuration interface and automatic game profile switching.
   Windows processes.
 - Restore keyboard factory defaults behind an explicit confirmation step.
 - Refuse HID writes to USB devices outside the supported FUN60 allowlist.
+- Reject untrusted browser origins, DNS-rebinding hosts, and form-style API
+  writes before they reach the local HID controller.
 - Run entirely on the local machine; process names and profiles are never sent
   to a remote service.
 
@@ -34,7 +37,7 @@ browser-based configuration interface and automatic game profile switching.
 Run `Start-Fun60.ps1`, or start it manually:
 
 ```powershell
-npm install
+npm ci
 npm run build
 npm start
 ```
@@ -102,6 +105,17 @@ devices remain read/write blocked by design.
 The static interface can be deployed to Vercel using the included
 `vercel.json`. Background automation always requires the Windows bridge because
 a hosted application cannot inspect local processes or USB devices.
+
+The bridge accepts its own interface and the local Vite development server by
+default. To connect a deployed interface, explicitly allow its exact origin
+when starting the bridge:
+
+```powershell
+$env:FUN60_ALLOWED_ORIGINS = "https://your-project.vercel.app"
+npm start
+```
+
+Use a comma-separated list for multiple trusted origins. Do not use wildcards.
 
 See [Architecture](docs/architecture.md) for protocol and trust-boundary details.
 

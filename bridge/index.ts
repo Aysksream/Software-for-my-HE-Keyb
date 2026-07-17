@@ -1,8 +1,8 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import cors from "cors";
 import express, { type NextFunction, type Request, type Response } from "express";
 import { Controller } from "./controller";
+import { apiSecurity } from "./security";
 import type { AutomationSettings, KeyboardProfile, ProfileId } from "../src/lib/types";
 
 const PORT = Number(process.env.FUN60_PORT ?? 3815);
@@ -10,9 +10,29 @@ const HOST = "127.0.0.1";
 const app = express();
 const controller = new Controller();
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  "base-uri 'none'",
+  "connect-src 'self' http://127.0.0.1:3815 http://localhost:3815",
+  "font-src 'self'",
+  "form-action 'none'",
+  "frame-ancestors 'none'",
+  "img-src 'self' data:",
+  "object-src 'none'",
+  "script-src 'self'",
+  "style-src 'self'",
+].join("; ");
 
 app.disable("x-powered-by");
-app.use(cors({ origin: true, methods: ["GET", "POST", "PUT", "OPTIONS"] }));
+app.use((_request, response, next) => {
+  response.setHeader("Content-Security-Policy", contentSecurityPolicy);
+  response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  response.setHeader("Permissions-Policy", "camera=(), geolocation=(), microphone=(), hid=(self)");
+  response.setHeader("Referrer-Policy", "no-referrer");
+  response.setHeader("X-Content-Type-Options", "nosniff");
+  next();
+});
+app.use("/api", apiSecurity(PORT));
 app.use(express.json({ limit: "256kb" }));
 
 app.get("/api/health", (_request, response) => response.json({ ok: true, version: "0.2.0" }));

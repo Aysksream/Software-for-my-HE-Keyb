@@ -57,13 +57,12 @@ export class Fun60Device {
         vendorId: device.vendorId,
         productId: device.productId,
         product: device.product ?? "MonsGeek FUN60",
-        path: device.path,
         transport: "bridge",
       };
       return this.summary;
     } catch (error) {
       this.summary = { connected: false, supported: false };
-      throw new Error(`HID scan failed: ${error instanceof Error ? error.message : String(error)}`);
+      throw new Error("HID scan failed. Close other keyboard software, reconnect the device, and try again.", { cause: error });
     }
   }
 
@@ -83,7 +82,7 @@ export class Fun60Device {
       return firmware;
     } catch (error) {
       this.close();
-      throw new Error(`Keyboard write failed: ${error instanceof Error ? error.message : String(error)}`);
+      throw new Error("Keyboard write failed. Rescan the keyboard and try again.", { cause: error });
     }
   }
 
@@ -158,7 +157,7 @@ export class Fun60Device {
       this.handle.sendFeatureReport(Array.from(buildCommand(COMMAND.factoryReset)));
       await sleep(2000);
     } catch (error) {
-      throw new Error(`Factory reset failed: ${error instanceof Error ? error.message : String(error)}`);
+      throw new Error("Factory reset failed. Reconnect the keyboard and try again.", { cause: error });
     } finally {
       this.close();
     }

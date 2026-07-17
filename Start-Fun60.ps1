@@ -3,7 +3,7 @@ $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location -LiteralPath $Root
 
 if (-not (Test-Path -LiteralPath (Join-Path $Root "node_modules"))) {
-    npm install
+    npm ci
 }
 
 npm run build
