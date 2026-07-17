@@ -1,0 +1,10 @@
+node_modules/
+dist/
+vendor-analysis/
+*.log
+.DS_Store
+.env
+.env.local
+coverage/
+.fun60-control/
+*.tmp

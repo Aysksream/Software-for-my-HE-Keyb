@@ -1,0 +1,53 @@
+{
+  "name": "fun60-control",
+  "version": "0.2.0",
+  "description": "Local-first MonsGeek FUN60 Hall Effect keyboard controller with automatic game profile switching",
+  "private": true,
+  "license": "GPL-3.0-only",
+  "author": "Aysksream",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aysksream/fun60-control.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Aysksream/fun60-control/issues"
+  },
+  "homepage": "https://github.com/Aysksream/fun60-control#readme",
+  "keywords": [
+    "monsgeek",
+    "fun60",
+    "hall-effect",
+    "keyboard",
+    "rapid-trigger",
+    "webhid"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:bridge": "tsx bridge/index.ts",
+    "build": "tsc --noEmit && vite build",
+    "local": "npm run build && npm start",
+    "start": "tsx bridge/index.ts",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "check": "npm run build && npm test"
+  },
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "5.2.1",
+    "lucide-react": "1.25.0",
+    "node-hid": "3.3.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/cors": "2.8.17",
+    "@types/express": "5.0.3",
+    "@types/node": "26.1.1",
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
+    "@vitejs/plugin-react": "6.0.3",
+    "tsx": "4.23.1",
+    "typescript": "5.7.2",
+    "vite": "8.1.5"
+  }
+}

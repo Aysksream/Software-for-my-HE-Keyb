@@ -1,0 +1,51 @@
+name: Bug report
+description: Report a reproducible problem with FUN//CTRL
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a problem. Remove serial numbers and complete HID device paths from logs.
+  - type: input
+    id: version
+    attributes:
+      label: FUN//CTRL version
+      placeholder: 0.2.0
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Keyboard model and firmware
+      placeholder: FUN60, firmware 1028
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Connection
+      options:
+        - Wired USB
+        - 2.4 GHz
+        - Bluetooth
+        - No keyboard connected
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Explain what you did and what happened.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      render: shell
